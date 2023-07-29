@@ -1,6 +1,7 @@
 require "replacer"
 require "clipboard"
 require "rainbow"
+require "io/console"
 
 REPLACEMENT_LIST = {
   "FOO" => "BAR",
@@ -17,21 +18,15 @@ REPLACEMENT_LIST.each do |src, dst|
 end
 
 puts color_text
+puts
+puts "Copy to clipboard? (YES ... ENTER/y, NO ... ESC/n)"
 
-# yes/no で実際にコピーするかキャンセルするかを確定したい
-gets
-Clipboard.copy(text)
-
-# loop do
-#   print "src> "
-#   src = gets.chomp
-
-#   print "dst> "
-#   dst = gets.chomp
-
-#   converted_text = text.gsub(src, dst)
-#   puts text.gsub(src, Rainbow(dst).bg(:red))
-#   Clipboard.copy(converted_text)
-
-#   text = converted_text
-# end
+while (key = $stdin.getch) != "\C-c"
+  case key
+  when "y", "\r", "\n"
+    Clipboard.copy(text)
+    break
+  when "n", "\e"
+    break
+  end
+end
