@@ -3,10 +3,23 @@ require "clipboard"
 require "rainbow"
 require "io/console"
 require "yaml"
+require "optparse"
+
+params = {}
+opt = OptionParser.new
+opt.on("-e", "--edit")
+opt.parse!(ARGV, into: params)
 
 replacer_yml = File.join(File.dirname(__FILE__), "replacer.yml")
-REPLACEMENT_LIST = YAML.load(File.read(replacer_yml))
 
+if params[:edit]
+  `code #{replacer_yml}`
+  puts "Open setting file '#{replacer_yml}'"
+  exit(0)
+end
+
+# main
+REPLACEMENT_LIST = YAML.load(File.read(replacer_yml))
 text = Clipboard.paste.encode("UTF-8")
 color_text = text
 
