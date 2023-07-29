@@ -2,12 +2,10 @@ require "replacer"
 require "clipboard"
 require "rainbow"
 require "io/console"
+require "yaml"
 
-REPLACEMENT_LIST = {
-  "FOO" => "BAR",
-  "Foo" => "Bar",
-  "フー" => "バー",
-}
+replacer_yml = File.join(File.dirname(__FILE__), "replacer.yml")
+REPLACEMENT_LIST = YAML.load(File.read(replacer_yml))
 
 text = Clipboard.paste.encode("UTF-8")
 color_text = text
