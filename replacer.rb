@@ -37,6 +37,11 @@ def main
 
   replacer_yml = File.join(File.dirname(__FILE__), "replacer.yml")
 
+  unless File.exist?(replacer_yml)
+    puts "Please add the replacement target to replacer.yml."
+    File.write(replacer_yml, "{\n}\n")
+  end
+
   if params[:edit]
     `code #{replacer_yml}`
     puts "Open setting file '#{replacer_yml}'"
