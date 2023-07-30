@@ -39,3 +39,8 @@ Copy the text you want to replace to the clipboard.
 $ replacer
 ```
 
+## Demo
+
+![GIF 2023-07-31 1-01-22](https://github.com/ongaeshi/replacer/assets/154418/c51b3c72-7f06-4db0-804c-bd0f190a975b)
+
+
